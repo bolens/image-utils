@@ -1,0 +1,563 @@
+[
+  {
+    "name": "library-inventory",
+    "operation": "inventory",
+    "description": "List file sizes and relative paths.",
+    "category": "library",
+    "mode": "read"
+  },
+  {
+    "name": "library-dupes",
+    "operation": "duplicates",
+    "description": "Find exact SHA-256 duplicates without deleting files.",
+    "category": "library",
+    "mode": "read"
+  },
+  {
+    "name": "hash-manifest",
+    "operation": "manifest",
+    "description": "Print a JSON SHA-256 manifest for the input tree.",
+    "category": "library",
+    "mode": "read"
+  },
+  {
+    "name": "hash-verify",
+    "operation": "hash-verify",
+    "description": "Verify file presence and hashes against a JSON manifest.",
+    "category": "library",
+    "mode": "read"
+  },
+  {
+    "name": "tree-diff",
+    "operation": "tree-diff",
+    "description": "Compare file hashes and presence against another tree.",
+    "category": "library",
+    "mode": "read"
+  },
+  {
+    "name": "path-audit",
+    "operation": "path-audit",
+    "description": "Report filename portability issues.",
+    "category": "library",
+    "mode": "read"
+  },
+  {
+    "name": "jpg-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame JPG to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".jpg",
+      ".jpeg"
+    ]
+  },
+  {
+    "name": "png-to-jpg",
+    "operation": "convert",
+    "description": "Convert single-frame PNG to JPG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "jpg",
+    "extensions": [
+      ".png"
+    ]
+  },
+  {
+    "name": "webp-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame WEBP to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".webp"
+    ]
+  },
+  {
+    "name": "png-to-webp",
+    "operation": "convert",
+    "description": "Convert single-frame PNG to WEBP.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "webp",
+    "extensions": [
+      ".png"
+    ]
+  },
+  {
+    "name": "tiff-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame TIFF to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".tif",
+      ".tiff"
+    ]
+  },
+  {
+    "name": "png-to-tiff",
+    "operation": "convert",
+    "description": "Convert single-frame PNG to TIFF.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "tiff",
+    "extensions": [
+      ".png"
+    ]
+  },
+  {
+    "name": "bmp-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame BMP to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".bmp"
+    ]
+  },
+  {
+    "name": "png-to-avif",
+    "operation": "convert",
+    "description": "Convert single-frame PNG to AVIF.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "avif",
+    "extensions": [
+      ".png"
+    ]
+  },
+  {
+    "name": "avif-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame AVIF to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".avif"
+    ]
+  },
+  {
+    "name": "heic-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame HEIC to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".heic",
+      ".heif"
+    ]
+  },
+  {
+    "name": "jxl-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame JXL to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".jxl"
+    ]
+  },
+  {
+    "name": "png-to-jxl",
+    "operation": "convert",
+    "description": "Convert single-frame PNG to JXL.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "jxl",
+    "extensions": [
+      ".png"
+    ]
+  },
+  {
+    "name": "gif-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame GIF to PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".gif"
+    ]
+  },
+  {
+    "name": "png-to-ppm",
+    "operation": "convert",
+    "description": "Convert single-frame PNG to PPM.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "ppm",
+    "extensions": [
+      ".png"
+    ]
+  },
+  {
+    "name": "image-resize",
+    "operation": "resize",
+    "description": "Fit inside a bounding box without upscaling.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-thumbnail",
+    "operation": "thumbnail",
+    "description": "Create a compact, oriented preview with metadata removed.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-auto-orient",
+    "operation": "auto-orient",
+    "description": "Apply stored orientation to pixels.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-strip",
+    "operation": "strip",
+    "description": "Remove embedded metadata from a new PNG copy.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-grayscale",
+    "operation": "grayscale",
+    "description": "Create a grayscale PNG copy.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-rotate",
+    "operation": "rotate",
+    "description": "Rotate pixels 90 degrees clockwise.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-flip",
+    "operation": "flip",
+    "description": "Flip pixels vertically.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-flop",
+    "operation": "flop",
+    "description": "Mirror pixels horizontally.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-crop",
+    "operation": "crop",
+    "description": "Crop a centered rectangle.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-flatten",
+    "operation": "flatten",
+    "description": "Composite transparency over white.",
+    "category": "transform",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-metadata",
+    "operation": "metadata",
+    "description": "Report dimensions, channels, bit depth, and frames.",
+    "category": "audit",
+    "mode": "read",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-verify",
+    "operation": "verify",
+    "description": "Decode all image frames to check integrity.",
+    "category": "audit",
+    "mode": "read",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-orientation",
+    "operation": "orientation",
+    "description": "Report stored image orientation.",
+    "category": "audit",
+    "mode": "read",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-colors",
+    "operation": "colors",
+    "description": "Count unique colors.",
+    "category": "audit",
+    "mode": "read",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-compare",
+    "operation": "compare",
+    "description": "Compare an image to a reference using RMSE.",
+    "category": "audit",
+    "mode": "read",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  },
+  {
+    "name": "image-alpha-audit",
+    "operation": "alpha-audit",
+    "description": "Report transparency and channel information.",
+    "category": "audit",
+    "mode": "read",
+    "extensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".tif",
+      ".tiff",
+      ".bmp",
+      ".gif",
+      ".avif",
+      ".heic",
+      ".heif",
+      ".jxl",
+      ".ppm"
+    ]
+  }
+]
