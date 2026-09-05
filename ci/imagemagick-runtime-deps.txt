@@ -1,0 +1,10 @@
+libjpeg-turbo8
+libpng16-16t64
+libtiff6
+libwebp7
+libwebpdemux2
+libwebpmux3
+libheif1
+libjxl0.7
+libopenjp2-7
+liblcms2-2

@@ -1,0 +1,10 @@
+build-essential
+pkg-config
+libjpeg-dev
+libpng-dev
+libtiff-dev
+libwebp-dev
+libheif-dev
+libjxl-dev
+libopenjp2-7-dev
+liblcms2-dev
