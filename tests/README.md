@@ -2,7 +2,7 @@
 
 `make test` runs shared CLI, publication, filename, configuration, and MCP tests.
 `make test-functional` runs real domain operations on generated fixtures.
-`make test-all` runs both tiers and repository-validation tests. Tests use disposable fixtures. CLI subprocesses receive isolated HOME/XDG/TMPDIR values.
+`make test-all` runs both tiers and repository-validation tests. Tests use disposable fixtures. CLI subprocesses receive isolated HOME, XDG config/state/cache/data/runtime paths, and TMPDIR values. Fixture encoders use the same environment.
 
 Image tests exercise conversion delegates, transforms, metadata, animation refusal, and thumbnail bounds.
 

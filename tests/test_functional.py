@@ -17,6 +17,7 @@ class Image(Fixture):
                 "gradient:#347756-#eeee99",
                 suffix + ":" + str(self.work / ("fixture." + suffix)),
             ],
+            env=self.env,
             capture_output=True,
         )
         if result.returncode:
@@ -64,6 +65,7 @@ class Image(Fixture):
                         + ":"
                         + str(self.work / ("probe." + tool["suffix"])),
                     ],
+                    env=self.env,
                     capture_output=True,
                 )
                 if probe.returncode:
@@ -111,6 +113,7 @@ class Image(Fixture):
         subprocess.run(
             ["magick", "-size", "8x8", "xc:red", "xc:blue", str(path)],
             check=True,
+            env=self.env,
             capture_output=True,
         )
         target = self.work / "flattened.png"
