@@ -16,3 +16,7 @@ The checkout folder may be renamed or contain spaces and Unicode. CLI identity
 and the default configuration directory remain `image-utils`. Git is required
 for the disposable-checkout regression tests; normal media commands do not
 require Git. Tests copy only tracked source and isolate HOME/XDG/TMPDIR state.
+
+## Docker
+
+The [Docker guide](docker.md) describes the packaged runtime and its limits.
