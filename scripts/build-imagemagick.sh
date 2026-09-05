@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# CI-only dependency build. Installs under the explicit prefix, never system paths.
+# CI/container dependency build. Installs under the explicit prefix, never system paths.
 set -euo pipefail
 if [[ $# != 1 || $1 != /* ]]; then
   echo 'usage: build-imagemagick.sh ABSOLUTE_PREFIX' >&2
@@ -16,6 +16,7 @@ git -C "$build_dir/source" fetch --depth=1 origin "$revision"
 git -C "$build_dir/source" checkout --detach FETCH_HEAD
 cd -- "$build_dir/source"
 ./configure --prefix="$prefix" --without-perl --disable-docs --disable-openmp --disable-static --without-x
-make -j"$(nproc)"
+make -j"${IM_BUILD_JOBS:-$(nproc)}"
 make install
+install -Dm644 LICENSE "$prefix/share/licenses/ImageMagick/LICENSE"
 LD_LIBRARY_PATH="$prefix/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" "$prefix/bin/magick" -version

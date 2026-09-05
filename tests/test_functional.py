@@ -8,6 +8,30 @@ from test_common import Fixture, core
 
 @unittest.skipUnless(shutil.which("magick"), "missing dependency: ImageMagick 7")
 class Image(Fixture):
+    def test_ppm_png_roundtrip_preserves_pixels(self):
+        pixels = bytes((255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255))
+        source = self.file("-雪 [*]\n.ppm", b"P6\n2 2\n255\n" + pixels)
+        original = source.read_bytes()
+        png, restored = self.work / "output.png", self.work / "restored.ppm"
+        self.cli("ppm-to-png", "-o", png, source)
+        self.assertFalse(png.exists())
+        self.cli("ppm-to-png", "--apply", "-o", png, source)
+        png_bytes = png.read_bytes()
+        self.cli("png-to-ppm", "--apply", "-o", restored, png)
+        for path in (png, restored):
+            actual = subprocess.run(
+                ["magick", str(path), "-depth", "8", "rgb:-"],
+                check=True, capture_output=True, env=self.env, timeout=30,
+            ).stdout
+            self.assertEqual(actual, pixels)
+        self.cli("ppm-to-png", "--apply", "-o", png, source, code=1)
+        self.assertEqual(png.read_bytes(), png_bytes)
+        self.assertEqual(source.read_bytes(), original)
+        corrupt = self.file("corrupt.ppm", b"P6\n2 2\n255\n")
+        failed = self.work / "failed.png"
+        self.cli("ppm-to-png", "--apply", "-o", failed, corrupt, code=1)
+        self.assertFalse(failed.exists())
+
     def test_transform_pixels_and_source_retention(self):
         # Every pixel differs, so swapped axes, rotation direction, and no-ops fail.
         pixels = [bytes(color) for color in (

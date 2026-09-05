@@ -1,0 +1,26 @@
+# Only runtime source enters the build context. Never include libraries or credentials.
+*
+!Dockerfile
+!lib/
+!lib/**
+!conversion/
+!conversion/**
+!util/
+!util/**
+!VERSION
+!LICENSE
+!mcp/
+!mcp/*.py
+!scripts/
+!scripts/build-imagemagick.sh
+!ci/
+!ci/imagemagick-build-deps.txt
+!bin/
+!bin/**
+**/__pycache__
+**/*.pyc
+**/.env
+**/.env.*
+**/.git
+**/.cache
+**/node_modules

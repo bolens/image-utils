@@ -18,7 +18,7 @@ bin/image-utils image-thumbnail --size 640x640 --output-dir ./previews ./origina
 # Review the plan, then add --apply to create outputs.
 ```
 
-37 commands cover conversion, inspection, and library maintenance. Tool directories are thin Bash entry points over a shared Python engine, following the layout and preservation intent of [audio-utils](https://github.com/bolens/audio-utils).
+38 commands cover conversion, inspection, and library maintenance. Tool directories are thin Bash entry points over a shared Python engine, following the layout and preservation intent of [audio-utils](https://github.com/bolens/audio-utils).
 
 ## Working contract
 
@@ -41,7 +41,7 @@ make install-hooks
 make -C util/transform/image-thumbnail help
 ```
 
-[CLI and configuration](docs/cli.md) · [Formats and limits](docs/formats.md) · [Architecture](docs/architecture.md) · [MCP](docs/mcp.md) · [Tests](tests/README.md) · [Release procedure](docs/releasing.md) · [Contributing](CONTRIBUTING.md)
+[Docker](docs/docker.md) · [CLI and configuration](docs/cli.md) · [Formats and limits](docs/formats.md) · [Architecture](docs/architecture.md) · [MCP](docs/mcp.md) · [Tests](tests/README.md) · [Release procedure](docs/releasing.md) · [Contributing](CONTRIBUTING.md)
 
 ## Status
 

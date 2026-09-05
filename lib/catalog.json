@@ -206,6 +206,17 @@
     ]
   },
   {
+    "name": "ppm-to-png",
+    "operation": "convert",
+    "description": "Convert single-frame PPM to lossless PNG.",
+    "category": "conversion",
+    "mode": "write",
+    "suffix": "png",
+    "extensions": [
+      ".ppm"
+    ]
+  },
+  {
     "name": "image-resize",
     "operation": "resize",
     "description": "Fit inside a bounding box without upscaling.",
