@@ -1,3 +1,3 @@
-ROOT := $(abspath ../../..)
+ROOT := ../../..
 TOOL := image-alpha-audit
 include $(ROOT)/lib/tool.mk

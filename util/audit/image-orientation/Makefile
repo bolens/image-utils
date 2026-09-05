@@ -1,3 +1,3 @@
-ROOT := $(abspath ../../..)
+ROOT := ../../..
 TOOL := image-orientation
 include $(ROOT)/lib/tool.mk
