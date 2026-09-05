@@ -55,9 +55,12 @@ docker run --rm --network=none --read-only --tmpfs /tmp \
 Add `--apply` after the tool name to write. Sources remain intact and existing
 outputs are refused. Quote filenames containing whitespace or shell characters.
 
-ImageMagick 7 is included with Debian raster delegates. Docker tests require
-PNG, JPEG, WebP, TIFF, AVIF, JXL and PPM conversion. The distribution security
-policy remains intact. Use `--entrypoint magick IMAGE -list format` to inspect
+ImageMagick 7 uses the same pinned source revision and build recipe as native CI,
+with Debian runtime delegates. The compiler and Git stay in the build stage.
+Docker builds default to four compiler jobs; use `--build-arg IM_BUILD_JOBS=N`
+to set a different build concurrency. Docker tests require
+PNG, JPEG, WebP, TIFF, AVIF, JXL and PPM conversion. The pinned build
+uses its upstream security policy. Use `--entrypoint magick IMAGE -list format` to inspect
 the installed delegates. See [formats](formats.md).
 
 For the read-only stdio MCP server, use `-i` without `-t`, select

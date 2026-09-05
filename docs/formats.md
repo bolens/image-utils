@@ -7,3 +7,7 @@ Conversion verifies full decoding, a single output frame, and unchanged dimensio
 Multi-frame inputs can be inspected and verified, but transformations reject them rather than silently dropping frames. RAW development, PDF/SVG rendering, animated image optimization, OCR, perceptual duplicate classification, and metadata editing are not implemented. Exact file duplicates use SHA-256. RMSE comparison describes pixel differences and is not a perceptual similarity claim.
 
 Image inputs are copied into temporary files with simple names before ImageMagick parses them. This preserves literal source names containing brackets, globs, newlines, or leading dashes.
+
+`ppm-to-png` complements `png-to-ppm` for single-frame RGB interchange. It uses
+the shared verified conversion path. The round-trip test compares exact 8-bit
+RGB pixels; it does not promise preservation of PPM comments or file bytes.

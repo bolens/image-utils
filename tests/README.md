@@ -24,3 +24,6 @@ Pixel checks use a small asymmetric RGB fixture with explicit expected bytes for
 fixtures, non-root ownership, read-only root operation and CLI failure behavior.
 It requires Docker and host Python 3.11+. `CONTAINER_ENGINE=podman` uses rootless
 Podman locally. Docker CI runs this target on every PR and main push.
+
+The PPM/PNG round-trip test compares exact RGB pixels and checks dry runs,
+source retention, collision refusal and corrupt-input non-publication.

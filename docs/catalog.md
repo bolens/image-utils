@@ -1,6 +1,6 @@
 # Tool catalog
 
-37 commands. Generated from `lib/catalog.json`.
+38 commands. Generated from `lib/catalog.json`.
 
 | Command | Category | Mode | Purpose |
 |---|---|---|---|
@@ -25,6 +25,7 @@
 | [`png-to-jxl`](../conversion/png-to-jxl/) | conversion | write | Convert single-frame PNG to JXL. |
 | [`gif-to-png`](../conversion/gif-to-png/) | conversion | write | Convert single-frame GIF to PNG. |
 | [`png-to-ppm`](../conversion/png-to-ppm/) | conversion | write | Convert single-frame PNG to PPM. |
+| [`ppm-to-png`](../conversion/ppm-to-png/) | conversion | write | Convert single-frame PPM to lossless PNG. |
 | [`image-resize`](../util/transform/image-resize/) | transform | write | Fit inside a bounding box without upscaling. |
 | [`image-thumbnail`](../util/transform/image-thumbnail/) | transform | write | Create a compact, oriented preview with metadata removed. |
 | [`image-auto-orient`](../util/transform/image-auto-orient/) | transform | write | Apply stored orientation to pixels. |

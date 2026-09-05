@@ -11,6 +11,10 @@
 !LICENSE
 !mcp/
 !mcp/*.py
+!scripts/
+!scripts/build-imagemagick.sh
+!ci/
+!ci/imagemagick-build-deps.txt
 !bin/
 !bin/**
 **/__pycache__

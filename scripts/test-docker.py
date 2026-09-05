@@ -64,7 +64,7 @@ def main():
         run('--version')
         source = inputs / '-雪 [*]\n.ppm'
         source.write_bytes(b'P6\n2 1\n255\n' + bytes((255, 0, 0, 0, 255, 0)))
-        run('/input/' + source.name, '/output/seed.png', entry='magick')
+        run('ppm-to-png', '--apply', '-o', '/output/seed.png', '/input/' + source.name)
         source = inputs / '-雪 [*]\n.png'
         shutil.move(outputs / 'seed.png', source)
         before = source.read_bytes()
