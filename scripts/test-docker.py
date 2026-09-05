@@ -2,6 +2,7 @@
 """Exercise the built CLI image on disposable bind mounts, without networking."""
 import argparse
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import tempfile
@@ -37,6 +38,8 @@ def main():
             if default_user:
                 i = opts.index('--user')
                 del opts[i:i + 2]
+                if '--userns=keep-id' in opts:
+                    opts.remove('--userns=keep-id')
             if entry:
                 opts += ['--entrypoint', entry]
             result = subprocess.run([args.engine, 'run', *opts, args.image, *map(str, command)],
@@ -61,20 +64,25 @@ def main():
         run('--version')
         source = inputs / '-雪 [*]\n.ppm'
         source.write_bytes(b'P6\n2 1\n255\n' + bytes((255, 0, 0, 0, 255, 0)))
+        run('/input/' + source.name, '/output/seed.png', entry='magick')
+        source = inputs / '-雪 [*]\n.png'
+        shutil.move(outputs / 'seed.png', source)
         before = source.read_bytes()
-        run('ppm-to-png', '--apply', '-o', '/output/source.png', '/input/' + source.name)
-        pixels = run('/output/source.png', '-depth', '8', 'txt:-', entry='magick')
+        pixels = run('/input/' + source.name, '-depth', '8', 'txt:-', entry='magick')
         if '#FF0000' not in pixels or '#00FF00' not in pixels:
             raise AssertionError('PNG pixel values changed')
         for fmt in ('jpg', 'webp', 'tiff', 'avif', 'jxl', 'ppm'):
             target = '/output/converted.' + fmt
-            run('png-to-' + fmt, '--apply', '-o', target, '/output/source.png')
+            run('png-to-' + fmt, '-o', target, '/input/' + source.name)
+            if (outputs / ('converted.' + fmt)).exists():
+                raise AssertionError('Planning wrote an image')
+            run('png-to-' + fmt, '--apply', '-o', target, '/input/' + source.name)
             run('image-verify', target)
             owned(outputs / ('converted.' + fmt))
-        target = '/output/source.png'
-        original = (outputs / 'source.png').read_bytes()
-        run('ppm-to-png', '--apply', '-o', target, '/input/' + source.name, code=1)
-        unchanged(outputs / 'source.png', original)
+        target = '/output/converted.webp'
+        original = (outputs / 'converted.webp').read_bytes()
+        run('png-to-webp', '--apply', '-o', target, '/input/' + source.name, code=1)
+        unchanged(outputs / 'converted.webp', original)
         unchanged(source, before)
         (inputs / 'bad.png').write_bytes(b'not an image')
         run('png-to-webp', '--apply', '-o', '/output/failed', '/input/bad.png', code=1)
