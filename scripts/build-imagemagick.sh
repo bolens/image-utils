@@ -18,4 +18,5 @@ cd -- "$build_dir/source"
 ./configure --prefix="$prefix" --without-perl --disable-docs --disable-openmp --disable-static --without-x
 make -j"${IM_BUILD_JOBS:-$(nproc)}"
 make install
+install -Dm644 LICENSE "$prefix/share/licenses/ImageMagick/LICENSE"
 LD_LIBRARY_PATH="$prefix/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" "$prefix/bin/magick" -version
