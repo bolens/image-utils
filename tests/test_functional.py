@@ -1,3 +1,4 @@
+from pathlib import Path
 import json
 import shutil
 import subprocess
@@ -7,6 +8,32 @@ from test_common import Fixture, core
 
 @unittest.skipUnless(shutil.which("magick"), "missing dependency: ImageMagick 7")
 class Image(Fixture):
+    def test_mixed_batch_preserves_success_and_reports_failure(self):
+        source = self.seed().rename(self.inputs / "zz-good.png")
+        corrupt = self.file("00-corrupt.png", b"invalid input")
+        before = {path: path.read_bytes() for path in (source, corrupt)}
+        for jobs in (1, 2):
+            with self.subTest(jobs=jobs):
+                output = self.work / ("batch-" + str(jobs))
+                success_log = self.work / ("success-" + str(jobs) + ".json")
+                failure_log = self.work / ("failure-" + str(jobs) + ".json")
+                response = json.loads(self.cli(
+                    "image-resize", "--apply", "-j", jobs, "--output-dir", output,
+                    "-S", success_log, "-L", failure_log, self.inputs, code=1,
+                ).stdout)
+                self.assertEqual([r["path"] for r in response["results"]], [str(source)])
+                self.assertEqual([r["path"] for r in response["failures"]], [str(corrupt)])
+                self.assertEqual(response["results"][0]["status"], "written")
+                self.assertEqual(response["failures"][0]["status"], "failed")
+                self.assertEqual(json.loads(success_log.read_text()), response["results"])
+                self.assertEqual(json.loads(failure_log.read_text()), response["failures"])
+                published = Path(response["results"][0]["output"])
+                self.cli("image-verify", published)
+                self.assertFalse(Path(response["failures"][0]["output"]).exists())
+                self.assertEqual(list(output.iterdir()), [published])
+                for path, original in before.items():
+                    self.assertEqual(path.read_bytes(), original)
+
     def seed(self, suffix="png"):
         path = self.inputs / ("space [1]\n." + suffix)
         result = subprocess.run(
