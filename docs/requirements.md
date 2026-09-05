@@ -9,3 +9,10 @@ Ubuntu 24.04 ships ImageMagick 6, so image CI builds the pinned ImageMagick 7 re
 ImageMagick processes local raster files. Keep ImageMagick, its delegates, and its security policy maintained. Inputs use the listed raster extensions and are staged under literal filenames before invoking ImageMagick. These restrictions do not sandbox the image parser.
 
 No automatic downloads, network enrichment, telemetry, package installation, or source deletion happens when running commands.
+
+## Development checkouts
+
+The checkout folder may be renamed or contain spaces and Unicode. CLI identity
+and the default configuration directory remain `image-utils`. Git is required
+for the disposable-checkout regression tests; normal media commands do not
+require Git. Tests copy only tracked source and isolate HOME/XDG/TMPDIR state.

@@ -1,3 +1,3 @@
-ROOT := $(abspath ../..)
+ROOT := ../..
 TOOL := png-to-avif
 include $(ROOT)/lib/tool.mk
