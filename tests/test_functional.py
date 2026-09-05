@@ -1,3 +1,4 @@
+from pathlib import Path
 import json
 import shutil
 import subprocess
@@ -7,6 +8,61 @@ from test_common import Fixture, core
 
 @unittest.skipUnless(shutil.which("magick"), "missing dependency: ImageMagick 7")
 class Image(Fixture):
+    def test_transform_pixels_and_source_retention(self):
+        # Every pixel differs, so swapped axes, rotation direction, and no-ops fail.
+        pixels = [bytes(color) for color in (
+            (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0),
+            (0, 255, 255), (255, 0, 255), (0, 0, 0), (255, 255, 255),
+        )]
+        source = self.file("literal [1]\n.ppm", b"P6\n4 2\n255\n" + b"".join(pixels))
+        original = source.read_bytes()
+        cases = (
+            ("image-flip", "4x2", (4, 2), [4, 5, 6, 7, 0, 1, 2, 3]),
+            ("image-flop", "4x2", (4, 2), [3, 2, 1, 0, 7, 6, 5, 4]),
+            ("image-rotate", "4x2", (2, 4), [4, 0, 5, 1, 6, 2, 7, 3]),
+            ("image-crop", "2x2", (2, 2), [1, 2, 5, 6]),
+            ("image-resize", "8x8", (4, 2), list(range(8))),
+        )
+        for tool, size, dimensions, order in cases:
+            with self.subTest(tool=tool):
+                target = self.work / (tool + ".png")
+                self.cli(tool, "--apply", "--size", size, "-o", target, source)
+                actual = subprocess.run(
+                    ["magick", str(target), "-depth", "8", "rgb:-"],
+                    check=True, capture_output=True, env=self.env, timeout=30,
+                ).stdout
+                self.assertEqual(actual, b"".join(pixels[i] for i in order))
+                frame = json.loads(self.cli("image-metadata", target).stdout)[
+                    "results"][0]["result"]["frames"][0]
+                self.assertEqual((frame["width"], frame["height"]), dimensions)
+                self.assertEqual(source.read_bytes(), original)
+
+    def test_mixed_batch_preserves_success_and_reports_failure(self):
+        source = self.seed().rename(self.inputs / "zz-good.png")
+        corrupt = self.file("00-corrupt.png", b"invalid input")
+        before = {path: path.read_bytes() for path in (source, corrupt)}
+        for jobs in (1, 2):
+            with self.subTest(jobs=jobs):
+                output = self.work / ("batch-" + str(jobs))
+                success_log = self.work / ("success-" + str(jobs) + ".json")
+                failure_log = self.work / ("failure-" + str(jobs) + ".json")
+                response = json.loads(self.cli(
+                    "image-resize", "--apply", "-j", jobs, "--output-dir", output,
+                    "-S", success_log, "-L", failure_log, self.inputs, code=1,
+                ).stdout)
+                self.assertEqual([r["path"] for r in response["results"]], [str(source)])
+                self.assertEqual([r["path"] for r in response["failures"]], [str(corrupt)])
+                self.assertEqual(response["results"][0]["status"], "written")
+                self.assertEqual(response["failures"][0]["status"], "failed")
+                self.assertEqual(json.loads(success_log.read_text()), response["results"])
+                self.assertEqual(json.loads(failure_log.read_text()), response["failures"])
+                published = Path(response["results"][0]["output"])
+                self.cli("image-verify", published)
+                self.assertFalse(Path(response["failures"][0]["output"]).exists())
+                self.assertEqual(list(output.iterdir()), [published])
+                for path, original in before.items():
+                    self.assertEqual(path.read_bytes(), original)
+
     def seed(self, suffix="png"):
         path = self.inputs / ("space [1]\n." + suffix)
         result = subprocess.run(

@@ -13,3 +13,9 @@ Shared regression tests also cover direct manifest-response round trips, malform
 Summary tests cover extension grouping, zero-byte files, overlapping roots, symlink exclusion, write refusal, MCP access, and operation without reading contents or invoking codecs.
 
 Exclusion tests cover repeated and case-sensitive patterns, relative paths, multiline names, both comparison roots, full manifest filtering, write plans, and folder-packing refusal.
+
+Publication checks cover writer failure, missing output, rejected verification, sync/link failures, existing destinations, and two concurrent publishers. They assert that failed outputs stay unpublished and staging files are removed.
+
+Mixed valid/corrupt batches run with one and two workers. Functional checks verify successful output, source retention, absent failed output, nonzero exit status, and matching success/failure reports. These cases run in the existing `make test` and `make test-functional` tiers, and together in `make test-all`.
+
+Pixel checks use a small asymmetric RGB fixture with explicit expected bytes for flip, flop, clockwise rotation, centered crop, and resize without upscaling. They also check dimensions and unchanged source bytes. This does not certify color profiles or lossy conversion fidelity.
