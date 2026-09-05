@@ -24,6 +24,28 @@ class Image(Fixture):
         shutil.copyfile(self.work / ("fixture." + suffix), path)
         return path
 
+    def test_exclude_corrupt_input_from_applied_batch(self):
+        source = self.seed()
+        before = core.digest(source)
+        ignored = self.file("skip-corrupt.png", b"not valid media")
+        output = self.work / "selected-output"
+        result = json.loads(
+            self.cli(
+                "png-to-webp",
+                "--exclude",
+                "skip*",
+                "--apply",
+                "--output-dir",
+                output,
+                self.inputs,
+            ).stdout
+        )
+        self.assertEqual(len(result["results"]), 1)
+        self.assertEqual(result["results"][0]["status"], "written")
+        self.assertEqual(result["failures"], [])
+        self.assertEqual(core.digest(source), before)
+        self.assertEqual(ignored.read_bytes(), b"not valid media")
+
     def test_every_converter(self):
         for tool in core.catalog():
             if tool["operation"] != "convert":
