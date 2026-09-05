@@ -8,3 +8,7 @@ libheif1
 libjxl0.7
 libopenjp2-7
 liblcms2-2
+libheif-plugin-aomenc
+libheif-plugin-aomdec
+libheif-plugin-x265
+libheif-plugin-libde265
