@@ -52,3 +52,5 @@ runtime proof. A topic without an implementation stays explicitly unimplemented.
 - [Relationship to audio-utils](parity.md)
 - [Release procedure](releasing.md)
 - [Requirements](requirements.md)
+
+- [Editor setup](../.vscode/README.md)
