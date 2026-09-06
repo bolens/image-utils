@@ -19,7 +19,8 @@ class Fixture(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="utility-test-")
         self.addCleanup(self.temp.cleanup)
-        self.work = Path(self.temp.name)
+        # macOS exposes its temporary root through the /var symlink.
+        self.work = Path(self.temp.name).resolve()
         self.home = self.work / "home"
         self.home.mkdir()
         self.inputs = self.work / "inputs"

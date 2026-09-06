@@ -16,7 +16,7 @@ class CheckoutPortability(unittest.TestCase):
     def setUpClass(cls):
         cls.temp = tempfile.TemporaryDirectory()
         cls.addClassCleanup(cls.temp.cleanup)
-        base = Path(cls.temp.name)
+        base = Path(cls.temp.name).resolve()
         cls.checkout = base / "renamed checkout 雪"
         cls.checkout.mkdir()
         tracked = subprocess.run(
@@ -62,7 +62,7 @@ class CheckoutPortability(unittest.TestCase):
         self.assert_success(self.command("make", "-C", "util/library/library-inventory", "help"))
 
     def test_default_config_namespace_stays_stable(self):
-        data = Path(self.temp.name) / "fixture-input"
+        data = Path(self.temp.name).resolve() / "fixture-input"
         data.mkdir()
         source = data / "fixture.txt"
         source.write_text("preserve this fixture")
