@@ -8,3 +8,11 @@ __pycache__/
 .ruff_cache/
 .venv/
 .coverage.*
+
+# Reproducible development state
+/.devenv/
+/.direnv/
+/devenv.local.nix
+/devenv.local.yaml
+/.devenv.flake.nix
+/.devenv.*/
