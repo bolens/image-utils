@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "image-utils": {
+      "command": "python3",
+      "args": [
+        "/absolute/path/to/image-utils/mcp/server.py",
+        "--allow-root",
+        "/absolute/path/to/library"
+      ]
+    }
+  }
+}
