@@ -59,6 +59,22 @@ class Fixture(unittest.TestCase):
 
 
 class Common(Fixture):
+    def test_missing_domain_executable_preserves_dependency_status(self):
+        source = self.file("literal [*]雪.ppm", b"P6\n1 1\n255\n\x01\x02\x03")
+        output = self.work / "output.png"
+        self.env["PATH"] = str(self.work / "no-executables")
+        self.cli("ppm-to-png", "-o", output, source)
+        self.assertFalse(output.exists())
+        for args in [("image-verify", source),
+                     ("ppm-to-png", "--apply", "-o", output, source)]:
+            with self.subTest(args=args):
+                result = self.cli(*args, code=2)
+                failures = json.loads(result.stdout)["failures"]
+                self.assertTrue(failures[0]["dependency"])
+                self.assertIn("missing dependency: magick", failures[0]["error"])
+                self.assertFalse(output.exists())
+                self.assertEqual(source.read_bytes(), b"P6\n1 1\n255\n\x01\x02\x03")
+
     def test_fixture_replaces_inherited_xdg_paths(self):
         caller = self.work / "caller-state"
         caller.mkdir()

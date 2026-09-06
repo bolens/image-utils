@@ -540,4 +540,6 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    # Domain imports must share this driver's UsageError identity.
+    sys.modules["core"] = sys.modules[__name__]
     sys.exit(main())

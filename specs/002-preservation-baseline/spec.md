@@ -12,6 +12,9 @@ claim that the original work followed Spec Kit. New behavior requires a separate
 change contract. Existing feature specifications remain authoritative within their
 own scope.
 
+[Legacy contracts](legacy-contracts.md) and [38-tool coverage](legacy-coverage.md)
+extend this baseline across existing domain and supporting surfaces.
+
 ## User scenarios and testing
 
 ### User story 1: Plan a conversion before writing (P1)
@@ -41,6 +44,14 @@ An operator inventories files, computes manifests, compares trees, or requests a
 - **FR-005**: Shared library tools MUST provide inventory, summary, exact duplicate hashes, manifests, hash verification, tree comparison, and path auditing without deleting source files.
 - **FR-006**: MCP MUST remain local stdio, expose only read operations, require allowed roots, and reject unknown arguments.
 - **FR-007**: Batch execution MUST bound outstanding jobs, preserve result ordering, retain successful outputs, and report partial failures with nonzero exit status.
+
+## Corrective requirement from the legacy audit
+
+- **FR-008**: Missing ImageMagick executables MUST retain dependency exit code 2
+  through the CLI's domain-module import boundary. Applied operations MUST leave
+  the source intact and publish no output; a dry-run plan must remain available
+  without the executable. A present executable with an unavailable delegate
+  remains an operation failure (1).
 
 ## Success criteria
 
