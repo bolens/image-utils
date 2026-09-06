@@ -3,3 +3,8 @@ __pycache__/
 .coverage
 .test-artifacts/
 .cache/
+
+# Local tooling and runtime artifacts
+.ruff_cache/
+.venv/
+.coverage.*
