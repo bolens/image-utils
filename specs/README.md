@@ -8,3 +8,6 @@ Installation validation alone does not establish feature completion.
 
 - [Development environments](002-development-environments/spec.md): [plan](002-development-environments/plan.md),
   [tasks and delivery evidence](002-development-environments/tasks.md).
+
+The baseline includes [legacy contracts](002-preservation-baseline/legacy-contracts.md)
+and [all 38 tools](002-preservation-baseline/legacy-coverage.md).
