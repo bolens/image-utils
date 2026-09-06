@@ -1,5 +1,7 @@
 # Image preservation utilities constitution
 
+[Documentation](../../docs/README.md)
+
 ## Core principles
 
 ### I. Domain verification
