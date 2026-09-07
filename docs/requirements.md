@@ -1,5 +1,7 @@
 # Requirements
 
+[Documentation](README.md)
+
 GNU/Linux, Bash 4.3+, Python 3.11+, and GNU Make for development shortcuts. No third-party Python packages are used. Python 3.11 and 3.14 run in CI. ShellCheck is required for `make check`.
 
 Image operations require ImageMagick **7** (`magick`). Library hashing and inventory need only Python. Codec availability depends on your ImageMagick build: AVIF/HEIC use libheif delegates, JXL uses libjxl, and WebP uses libwebp. `magick -list format` shows local support. Missing delegates are reported as operation failures. Tests mark unavailable optional encode delegates as skips.
