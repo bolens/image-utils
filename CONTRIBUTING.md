@@ -11,3 +11,8 @@ Explain what changed, why, and which tests ran in pull requests. Keep output ver
 ## Reproducible development
 
 Use the [development environment guide](docs/development-environments.md) for devenv and local Docker, Podman, or Apple container validation. Run the native gate on disposable fixtures and report optional delegate skips. Follow [RELEASING.md](RELEASING.md) for reviewed delivery.
+
+## Devcontainer
+
+See [the devcontainer guide](.devcontainer/README.md) for the repository toolchain,
+setup, checks and platform limits.
