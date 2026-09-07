@@ -1,5 +1,7 @@
 # Formats and limits
 
+[Documentation](README.md)
+
 The catalog covers JPEG, PNG, WebP, TIFF, BMP, AVIF, HEIC, JXL, GIF, and PPM where installed delegates support them. PNG is the default transform output. JPEG outputs composite transparency over white. JPEG and typical AVIF/WebP encodes are lossy and cannot restore detail. `--quality` defaults to 85 and follows each encoder's meaning.
 
 Conversion verifies full decoding, a single output frame, and unchanged dimensions. Resizing and thumbnails verify the bounding box. This checks structural output integrity, not pixel equivalence or colorimetric fidelity. Profiles follow ImageMagick defaults unless the operation strips them. Metadata stripping and thumbnails remove profiles as well as tags, so review color-sensitive workflows before using those operations.

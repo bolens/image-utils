@@ -4,7 +4,7 @@
 
 Convert raster formats, prepare previews, inspect metadata, and check image libraries from the command line. Your originals stay where they are.
 
-**[Browse the site](https://bolens.github.io/image-utils/)** · [Command catalog](docs/catalog.md) · [Architecture diagram](https://bolens.github.io/image-utils/diagrams/architecture.html)
+**[Browse the site](https://bolens.github.io/image-utils/)** · [Documentation](docs/README.md) · [Command catalog](docs/catalog.md) · [Architecture diagram](https://bolens.github.io/image-utils/diagrams/architecture.html)
 
 ## Start here
 
