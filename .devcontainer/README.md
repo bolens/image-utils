@@ -29,3 +29,7 @@ Image references include immutable digests. Dependabot monitors the Dockerfiles
 where supported. Distribution packages resolve from the configured Debian
 repositories at build time. Update image pins and rerun setup and native checks
 together. Existing native and Nix workflows remain available independently.
+
+The development container uses Node 26. The retained hosted Linux lane builds
+this Dockerfile and runs its isolated post-create smoke for devcontainer
+changes; native Woodpecker Nix checks are separate evidence.
